@@ -18,6 +18,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Setter
     @Column(nullable = false)
     private String password;
 
@@ -64,5 +65,6 @@ public class User {
         this.city = city;
         this.company = company;
     }
+
 }
 

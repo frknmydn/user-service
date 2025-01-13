@@ -1,5 +1,7 @@
 package com.devConenct.user_service.interfaces.controller;
 
+import com.devConenct.user_service.application.dto.LoginRequestDto;
+import com.devConenct.user_service.application.dto.LoginResponseDto;
 import com.devConenct.user_service.application.dto.UserRequestDto;
 import com.devConenct.user_service.application.dto.UserResponseDto;
 import com.devConenct.user_service.application.service.UserAppService;
@@ -24,12 +26,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponseDto> registerUser(@RequestBody UserRequestDto userRequestDto) {
-        try {
-            UserResponseDto response = userAppService.registerUser(userRequestDto);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
-        }
+    public ResponseEntity<UserResponseDto> registerUser(@RequestBody @Valid UserRequestDto userRequestDto) {
+        UserResponseDto response = userAppService.registerUser(userRequestDto);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto) {
+        LoginResponseDto response = userAppService.login(loginRequestDto);
+        return ResponseEntity.ok(response);
     }
 }
